@@ -1,0 +1,28 @@
+import os
+import sys
+
+env = Environment()
+
+PIXMIN_VERSION = "1.0.0"
+PIXMIN_APPS = [
+    "pixmin_hub",
+    "pixmin_subghz_brute",
+    "pixmin_wifi_marauder",
+    "pixmin_badusb_studio",
+    "pixmin_rfid_fuzzer",
+]
+
+EXTERNAL_APPS_DIR = "applications/external"
+
+def get_app_dirs():
+    dirs = []
+    for app in PIXMIN_APPS:
+        d = os.path.join(EXTERNAL_APPS_DIR, app.replace("pixmin_", "").replace("pixmin", "pixmin_hub"))
+        if os.path.isdir(d):
+            dirs.append(d)
+    return dirs
+
+print(f"pixmin firmware v{PIXMIN_VERSION}")
+print(f"apps: {', '.join(PIXMIN_APPS)}")
+print("run: python3 installer/install.py build")
+print("or:  cd <flipper-fw> && ./fbt updater_package")

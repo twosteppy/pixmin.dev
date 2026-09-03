@@ -1,0 +1,15 @@
+build/
+dist/
+__pycache__/
+*.pyc
+.DS_Store
+*.o
+*.elf
+*.bin
+*.dfu
+.fbt/
+flipper-zero-firmware/
+firmware/_build/
+*.swp
+*.swo
+.vscode/
