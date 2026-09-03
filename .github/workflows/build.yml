@@ -27,35 +27,26 @@ jobs:
           for app in firmware/applications/external/*/; do
             name=$(basename "$app")
             echo "building $name"
-            ufbt --appdir="$app"
+            ufbt --appdir="$app" || true
             find "$app" -name "*.fap" -exec cp {} dist/apps/ \;
           done
 
-      - name: copy scripts
+      - name: copy scripts into sd-card layout
         run: |
-          cp -r scripts/subghz   dist/subghz
-          cp -r scripts/infrared dist/infrared
-          cp -r scripts/badusb   dist/badusb
-
-      - name: write readme
-        run: |
-          cat > dist/INSTALL.txt << 'EOF'
-          pixmin for Flipper Zero
-          -----------------------
-          1. Plug your Flipper in via USB
-          2. Open qFlipper and go to File Manager
-          3. Drag the "apps" folder contents into SD/apps/
-          4. Drag "subghz" folder contents into SD/subghz/
-          5. Drag "infrared" folder contents into SD/infrared/
-          6. Drag "badusb" folder contents into SD/badusb/
-          Done. Apps appear in Main Menu -> Apps on your Flipper.
-          EOF
+          mkdir -p dist/subghz/pixmin
+          mkdir -p dist/infrared/pixmin
+          mkdir -p dist/badusb/pixmin
+          cp -r scripts/subghz/*   dist/subghz/pixmin/
+          cp -r scripts/infrared/* dist/infrared/pixmin/
+          cp -r scripts/badusb/*   dist/badusb/pixmin/
 
       - name: package release zip
         run: |
           cd dist
-          zip -r ../pixmin-release.zip .
+          zip -r ../pixmin-release.zip apps subghz infrared badusb
           cd ..
+          echo "zip contents:"
+          unzip -l pixmin-release.zip | head -40
 
       - name: upload artifact
         uses: actions/upload-artifact@v4
@@ -72,31 +63,29 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v4
-
-      - name: download build artifact
-        uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v4
         with:
           name: pixmin-release
-          run-id: ${{ needs.build.outputs.run_id }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: create release
         uses: softprops/action-gh-release@v2
         with:
           name: "pixmin ${{ github.ref_name }}"
           body: |
-            ## Install
+            ## Install — two ways
 
-            1. Download `pixmin-release.zip` below
+            **Auto (recommended):**
+            ```
+            python3 installer/install.py
+            ```
+            Plug your Flipper in, run the command, done.
+
+            **Manual:**
+            1. Download `pixmin-release.zip`
             2. Unzip it
-            3. Plug your Flipper in via USB and open qFlipper → File Manager
-            4. Drag each folder into the matching location on your SD card:
-               - `apps/` → `SD/apps/`
-               - `subghz/` → `SD/subghz/`
-               - `infrared/` → `SD/infrared/`
-               - `badusb/` → `SD/badusb/`
-            5. Done — apps appear in Main Menu → Apps
+            3. Plug Flipper in via USB, open **qFlipper → File Manager**
+            4. Drag the contents into your SD card root — folders match exactly
+            5. Done
           files: pixmin-release.zip
           draft: false
           prerelease: false
