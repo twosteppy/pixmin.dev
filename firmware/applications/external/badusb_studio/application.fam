@@ -1,0 +1,15 @@
+App(
+    appid="pixmin_badusb_studio",
+    name="BadUSB Studio",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="badusb_studio_app",
+    cdefines=["APP_PIXMIN_BADUSB"],
+    requires=["gui", "storage", "notification"],
+    stack_size=3 * 1024,
+    fap_icon="badusb_10px.png",
+    fap_category="USB",
+    fap_description="badusb payload browser and launcher",
+    fap_author="pixmin",
+    fap_version="1.0",
+    fap_weburl="https://pixmin.dev",
+)

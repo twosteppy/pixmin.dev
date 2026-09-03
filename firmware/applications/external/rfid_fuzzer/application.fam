@@ -1,0 +1,15 @@
+App(
+    appid="pixmin_rfid_fuzzer",
+    name="RFID Fuzzer",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="rfid_fuzzer_app",
+    cdefines=["APP_PIXMIN_RFID"],
+    requires=["gui", "lfrfid", "notification"],
+    stack_size=3 * 1024,
+    fap_icon="rfid_10px.png",
+    fap_category="125 kHz RFID",
+    fap_description="sequential uid brute for rfid readers",
+    fap_author="pixmin",
+    fap_version="1.0",
+    fap_weburl="https://pixmin.dev",
+)
