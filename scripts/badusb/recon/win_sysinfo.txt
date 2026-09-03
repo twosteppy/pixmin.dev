@@ -1,0 +1,5 @@
+DELAY 1000
+GUI r
+DELAY 600
+STRING powershell -WindowStyle Hidden -Command "& {Start-Process powershell -ArgumentList '-WindowStyle Hidden -Command \"systeminfo; Get-WmiObject -Class Win32_ComputerSystem | Select-Object *; Get-NetIPAddress | Select-Object InterfaceAlias,AddressFamily,IPAddress; Get-LocalUser | Select-Object Name,Enabled,LastLogon\" 2>&1 | Out-File $env:TEMP\px_sys.txt; notepad $env:TEMP\px_sys.txt'}"
+ENTER

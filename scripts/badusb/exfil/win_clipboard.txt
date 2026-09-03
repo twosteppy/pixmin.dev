@@ -1,0 +1,5 @@
+DELAY 1000
+GUI r
+DELAY 600
+STRING powershell -WindowStyle Hidden -Command "& { Add-Type -AssemblyName System.Windows.Forms; $clip = [System.Windows.Forms.Clipboard]::GetText(); $clip | Out-File $env:TEMP\px_clip.txt; notepad $env:TEMP\px_clip.txt }"
+ENTER

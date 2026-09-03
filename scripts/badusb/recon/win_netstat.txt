@@ -1,0 +1,14 @@
+DELAY 1000
+GUI r
+DELAY 600
+STRING cmd /k
+ENTER
+DELAY 700
+STRING netstat -ano 2>&1 | more
+ENTER
+DELAY 500
+STRING arp -a
+ENTER
+DELAY 500
+STRING route print
+ENTER

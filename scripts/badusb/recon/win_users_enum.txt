@@ -1,0 +1,5 @@
+DELAY 1000
+GUI r
+DELAY 600
+STRING powershell -WindowStyle Hidden -Command "& { Get-LocalUser | fl *; Get-LocalGroup | fl *; whoami /all; net user 2>&1 | Out-File $env:TEMP\px_users.txt; Start-Process notepad $env:TEMP\px_users.txt }"
+ENTER

